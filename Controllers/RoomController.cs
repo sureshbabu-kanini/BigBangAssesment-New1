@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BigBangAssessmentNew.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RoomController : ControllerBase
@@ -21,13 +21,11 @@ namespace BigBangAssessmentNew.Controllers
 
 
         [HttpGet]
-        [ProducesResponseType(statusCode: 204)]
-        [ProducesResponseType(statusCode: 200)]
-        public async Task<IActionResult> GetAllHotels()
+        public async Task<IActionResult>GetAllHotels()
         {
             try
             {
-                var hotels = await _hotelRepo.GetAllRoomAsync();
+                var hotels = await _hotelRepo.GetAllRoom();
                 return Ok(hotels);
             }
             catch (Exception ex)
@@ -38,13 +36,11 @@ namespace BigBangAssessmentNew.Controllers
 
 
         [HttpGet("{id}")]
-        [ProducesResponseType(statusCode: 204)]
-        [ProducesResponseType(statusCode: 200)]
-        public async Task<IActionResult> GetRoomById(int id)
+        public async Task<IActionResult>GetRoomById(int id)
         {
             try
             {
-                var hotel = await _hotelRepo.GetRoomByIdAsync(id);
+                var hotel = await _hotelRepo.GetRoomById(id);
                 if (hotel == null)
                 {
                     return NotFound();
@@ -58,11 +54,7 @@ namespace BigBangAssessmentNew.Controllers
         }
 
         [HttpPost]
-
-
-        [ProducesResponseType(statusCode: 201)]
-        [ProducesResponseType(statusCode: 409)]
-        public async Task<IActionResult> PostHotels([FromBody] RoomDTO room)
+        public async Task<IActionResult>PostHotels([FromBody] RoomDTO room)
         {
             try
             {
@@ -70,7 +62,7 @@ namespace BigBangAssessmentNew.Controllers
                 {
                     return BadRequest();
                 }
-                var addedHotel = await _hotelRepo.PostRoomAsync(room);
+                var addedHotel = await _hotelRepo.PostRoom(room);
                 return CreatedAtAction(nameof(GetRoomById), new { id = addedHotel.RoomId }, addedHotel);
             }
             catch (Exception ex)
@@ -80,8 +72,7 @@ namespace BigBangAssessmentNew.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHotel(int id, [FromBody] Room room
-            )
+        public async Task<IActionResult>PutHotel(int id, [FromBody] Room room)
         {
             try
             {
@@ -89,7 +80,7 @@ namespace BigBangAssessmentNew.Controllers
                 {
                     return BadRequest();
                 }
-                var updatedHotel = await _hotelRepo.PutRoomAsync(id, room);
+                var updatedHotel = await _hotelRepo.PutRoom(id, room);
                 if (updatedHotel == null)
                 {
                     return NotFound();
@@ -102,11 +93,11 @@ namespace BigBangAssessmentNew.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DelHotels(int id)
+        public async Task<IActionResult>DeleteHotels(int id)
         {
             try
             {
-                var room = await _hotelRepo.DelRoomAsync(id);
+                var room = await _hotelRepo.DeleteRoom(id);
                 if (room == null)
                 {
                     return NotFound();
@@ -119,22 +110,23 @@ namespace BigBangAssessmentNew.Controllers
             }
         }
 
-        [HttpGet("capacity")]
-        public async Task<IActionResult> GetCapacity(string type, int capacity)
+        [HttpGet("Room-Type")]
+        public async Task<IActionResult> GetHotelsByRoomType(string Roomtype)
         {
             try
             {
-                var room = await _hotelRepo.GetRoomsByTypeAndCapacityAsync(type, capacity);
-                if (room == null)
+                var hotels = await _hotelRepo.GetHotelsByRoomType(Roomtype);
+                if (hotels == null)
                 {
                     return NotFound();
                 }
-                return Ok(room);
+                return Ok(hotels);
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
     }
 }

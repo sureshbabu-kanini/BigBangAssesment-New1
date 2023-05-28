@@ -1,4 +1,6 @@
 using BigBangAssessmentNew.Data;
+using BigBangAssessmentNew.Repositories.RepoClass;
+using BigBangAssessmentNew.Repositories.RepoInterface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -22,11 +24,10 @@ builder.Services.AddControllers().AddNewtonsoftJson(Options =>
 
 
 #region
-
 var ConnectionString = builder.Configuration.GetConnectionString("Assessment");
-
 builder.Services.AddDbContext<APIdbContext>(option => option.UseSqlServer(ConnectionString));
-
+builder.Services.AddScoped<IHotelRepositories, HotelRepositories>();
+builder.Services.AddScoped<IRoomRepositories, RoomRepositories>();
 
 #endregion
 

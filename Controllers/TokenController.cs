@@ -10,7 +10,7 @@ using System.Text;
 
 namespace BigBangAssessmentNew.Controllers
 {
-   // [Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class TokenController : ControllerBase
     {
@@ -32,7 +32,6 @@ namespace BigBangAssessmentNew.Controllers
 
                 if (user != null)
                 {
-                    //create claims details based on the user information
                     var claims = new[] {
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
@@ -64,7 +63,6 @@ namespace BigBangAssessmentNew.Controllers
                 return BadRequest();
             }
         }
-
         private async Task<User> GetUser(string email, string password)
         {
             return await _context.users.FirstOrDefaultAsync(u => u.UserEmail == email && u.Password == password);

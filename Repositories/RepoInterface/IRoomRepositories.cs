@@ -5,11 +5,12 @@ namespace BigBangAssessmentNew.Repositories.RepoInterface
 {
     public interface IRoomRepositories
     {
-        Task<IEnumerable<Room>> GetAllRoomAsync();
-        Task<Room> GetRoomByIdAsync(int id);
-        Task<Room> PostRoomAsync(RoomDTO room);
-        Task<Room> PutRoomAsync(int id, Room room);
-        Task<Room> DelRoomAsync(int id);
-        Task<IEnumerable<Room>> GetRoomsByTypeAndCapacityAsync(string type, int capacity);
+        Task<IEnumerable<Room>> GetAllRoom();
+        Task<Room> GetRoomById(int id);
+        Task<Room> PostRoom(RoomDTO room);
+        Task<Room> PutRoom(int id, Room room);
+        Task<Room> DeleteRoom(int id);
+        Task<IEnumerable<Hotel>> GetHotelsByRoomType(string Roomtype);
+
     }
 }

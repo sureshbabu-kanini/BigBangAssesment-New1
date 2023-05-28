@@ -5,15 +5,12 @@ namespace BigBangAssessmentNew.Repositories.RepoInterface
 {
     public interface IHotelRepositories
     {
-        Task<IEnumerable<Hotel>> GetAllHotelsAsync();
-        Task<Hotel> GetHotelByIdAsync(int id);
-        Task<Hotel> PostHotelsAsync(HotelDTO hotel);
-        Task<Hotel> PutHotelAsync(int id, Hotel hotel);
-        Task<Hotel> DelHotelsAsync(int id);
-        Task<string> GetRoomCountMessageByHotelIdAsync(int hotelId);
-        Task<string> GetPhoneNumberByAddressAsync(string address);
-
-
-        Task<Hotel> GetByIdAsync(int id);
+        Task<IEnumerable<Hotel>> GetAllHotels();
+        Task<Hotel> GetHotelById(int id);
+        Task<Hotel> PostHotels(HotelDTO hotel);
+        Task<Hotel> PutHotel(int id, Hotel hotel);
+        Task<Hotel> DeleteHotels(int id);
+        Task<string> GetRoomCount(string hotelName);
+        Task<string> GetPhoneNumber(string address);
     }
 }
