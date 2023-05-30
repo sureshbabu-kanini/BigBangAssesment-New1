@@ -94,24 +94,19 @@ namespace BigBangAssessmentNew.Repositories.RepoClass
         {
             try
             {
-                // Find the hotel with the specified name
-                Hotel hotel = await projectcontext.hotels
-                    .Include(h => h.Rooms)
-                    .FirstOrDefaultAsync(h => h.Name == hotelName);
+ 
+                Hotel hotel = await projectcontext.hotels.Include(h => h.Rooms).FirstOrDefaultAsync(h => h.Name == hotelName);
 
                 if (hotel != null)
                 {
-                    // Get the count of rooms in the hotel
                     int roomCount = hotel.Rooms.Count;
-
-                    // Construct the message with the room count and details
                     StringBuilder messageBuilder = new StringBuilder();
                     messageBuilder.AppendLine($"Hotel: {hotel.Name}");
                     messageBuilder.AppendLine($"Address: {hotel.Address}");
                     messageBuilder.AppendLine($"Phone Number: {hotel.PhoneNumber}");
                     messageBuilder.AppendLine($"Room Count: {roomCount}");
 
-                    // Append the details of each room
+            
                     if (roomCount > 0)
                     {
                         messageBuilder.AppendLine("Room Details:");
@@ -119,7 +114,7 @@ namespace BigBangAssessmentNew.Repositories.RepoClass
                         {
                             messageBuilder.AppendLine($"- Room Number: {room.RoomNumber}");
                             messageBuilder.AppendLine($"  Room Type: {room.Type}");
-                            // Add more room details if necessary
+            
                         }
                     }
 

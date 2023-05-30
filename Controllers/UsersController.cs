@@ -1,5 +1,6 @@
 ﻿using BigBangAssessmentNew.Data;
 using BigBangAssessmentNew.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace BigBangAssessmentNew.Controllers
             _context = context;
         }
 
-        // GET: api/Users
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> Getusers()
         {
@@ -28,7 +29,7 @@ namespace BigBangAssessmentNew.Controllers
             return await _context.users.ToListAsync();
         }
 
-        // GET: api/Users/5
+
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -46,7 +47,7 @@ namespace BigBangAssessmentNew.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -76,8 +77,7 @@ namespace BigBangAssessmentNew.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
@@ -91,7 +91,7 @@ namespace BigBangAssessmentNew.Controllers
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
-        // DELETE: api/Users/5
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

@@ -69,7 +69,7 @@ namespace BigBangAssessmentNew.Controllers
                 }
             }
 
-            // PUT api/<ProjectController>/5
+
             [HttpPut("{id}")]
             public async Task<IActionResult>PutHotel(int id, [FromBody] Hotel hotel)
             {
